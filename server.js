@@ -1,4 +1,5 @@
 const
+  net = require('net'),
   https = require('https'),
   ws = require('websocket').server,
   fs = require('fs'),
@@ -45,3 +46,13 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
   });
 });
+
+const
+  telnetServer = net.createServer(function(sock) {
+    sock.on('data', function(data) {
+      let dataToSend = '' + data;
+      wsServer.connections.forEach(function(c) {
+        c.send(dataToSend, function() { /* no err handler */ });
+      });
+    });
+  }).listen(9501);
