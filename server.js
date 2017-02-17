@@ -15,7 +15,7 @@ const server = https.createServer(options, function(req, res) {
   } else {
     fileToLoad = 'public' + req.url;
   }
-  console.log((new Date()) + ' URI: ' + fileToLoad);
+  console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad);
   res.writeHeader(200, {"Content-Type": "text/html"});
   fs.readFile(fileToLoad, 'utf8', function(err, data) {
     if (err) {
@@ -58,7 +58,7 @@ const telnetServer = net.createServer(function(sock) {
     let dataToSend = '' + data;
     wsServer.connections.forEach(function(c) {
       c.send(dataToSend, function() { /* no err handler */ });
-    process.stdout.write((new Date()) + ' Sent to WebSocket clients: ' + dataToSend);
+    process.stdout.write((new Date()) + ' websocket broadcast: ' + dataToSend);
     });
   });
   sock.on('close', function(data) {
