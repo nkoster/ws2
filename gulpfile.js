@@ -22,7 +22,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-  gulp.src(['js/reconnect.js', 'js/app.js'])
+  gulp.src(['js/app.js'])
     .pipe(concat('app.js'))
 //    .pipe(uglify())
     .pipe(gulp.dest('public/assets'))
