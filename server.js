@@ -39,7 +39,7 @@ wsServer = new ws({
 });
 
 wsServer.on('request', function(request) {
-  let connection = request.accept('echo-protocol', request.origin);
+  let connection = request.accept(null, request.origin);
   console.log((new Date()) + ' Connection accepted');
   connection.on('message', function(message) {
     if (message.type === 'utf8') {
@@ -55,19 +55,16 @@ wsServer.on('request', function(request) {
   });
 });
 
-const
-  telnetServer = net.createServer(function(sock) {
-    console.log((new Date()) + ' telnet connection ' + sock.remoteAddress);
-    sock.on('data', function(data) {
-      let dataToSend = '' + data;
-      wsServer.connections.forEach(function(c) {
-        c.send(dataToSend, function() { /* no err handler */ });
-      //console.log((new Date()) + ' Sent to WebSocket clients: ' + dataToSend);
-      });
-    });
-    sock.on('close', function(data) {
-      console.log((new Date()) + ' closed ' + sock.remoteAddress);
+net.createServer(function(sock) {
+  console.log((new Date()) + ' telnet connection ' + sock.remoteAddress);
+  sock.on('data', function(data) {
+    let dataToSend = '' + data;
+    wsServer.connections.forEach(function(c) {
+      c.send(dataToSend, function() { /* no err handler */ });
+    console.log((new Date()) + ' Sent to WebSocket clients: ' + dataToSend);
     });
   });
-
-telnetServer.listen(9501);
+  sock.on('close', function(data) {
+    console.log((new Date()) + ' closed ' + sock.remoteAddress);
+  });
+}).listen(9501);
