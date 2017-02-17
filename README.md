@@ -4,4 +4,6 @@ What works now: open in browser and receive ws updates in the browser console.lo
 
 Run server.js with Nodejs version v6.9.5.
 
- node server.js
+```bash
+node server.js
+```
