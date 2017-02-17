@@ -10,17 +10,26 @@ const
 
 const
   server = https.createServer(options, function(req, res) {
-  res.writeHead(200);
-  fs.readFile('public/index.html', 'utf8', function (err, data) {
-    if (err) {
-      return console.log(err);
+    //res.writeHead(200);
+    let fileToLoad = '';
+    if (req.url === '/') {
+      fileToLoad = 'public/index.html';
+    } else {
+      fileToLoad = 'public' + req.url;
     }
-    res.end(data);
-  });
-})
+    console.log((new Date()) + ' URI: ' + fileToLoad);
+    res.writeHeader(200, {"Content-Type": "text/html"});
+    fs.readFile(fileToLoad, 'utf8', function(err, data) {
+      if (err) {
+        return console.log(err);
+      }
+      res.end(data);
+    });
+  })
 
 server.listen(443, function() {
-  console.log((new Date()) + ' Server started at port 443');
+  console.log((new Date()) + ' https server started at port 443');
+  console.log((new Date()) + ' telnet server started at port 9501');
 });
 
 wsServer = new ws({
@@ -30,8 +39,7 @@ wsServer = new ws({
 });
 
 wsServer.on('request', function(request) {
-  const
-    connection = request.accept('echo-protocol', request.origin);
+  let connection = request.accept('echo-protocol', request.origin);
   console.log((new Date()) + ' Connection accepted');
   connection.on('message', function(message) {
     if (message.type === 'utf8') {
@@ -49,10 +57,17 @@ wsServer.on('request', function(request) {
 
 const
   telnetServer = net.createServer(function(sock) {
+    console.log((new Date()) + ' telnet connection ' + sock.remoteAddress);
     sock.on('data', function(data) {
       let dataToSend = '' + data;
       wsServer.connections.forEach(function(c) {
         c.send(dataToSend, function() { /* no err handler */ });
+      //console.log((new Date()) + ' Sent to WebSocket clients: ' + dataToSend);
       });
     });
-  }).listen(9501);
+    sock.on('close', function(data) {
+      console.log((new Date()) + ' closed ' + sock.remoteAddress);
+    });
+  });
+
+telnetServer.listen(9501);
