@@ -26,7 +26,7 @@ const server = https.createServer(options, function(req, res) {
     });
   } else {
     console.log((new Date()) + ' ' + req.connection.remoteAddress + ' not found: ' + fileToLoad);
-    res.writeHeader(200, {"Content-Type": "text/html"});
+    res.writeHeader(404, {"Content-Type": "text/html"});
     res.write("404 Not Found\n");
     res.end();
   }
