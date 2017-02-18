@@ -1,3 +1,4 @@
+'use strict';
 const
   net = require('net'),
   https = require('https'),
@@ -36,7 +37,7 @@ server.listen(443, function() {
   console.log((new Date()) + ' https server started at port 443');
 });
 
-wsServer = new ws({
+const wsServer = new ws({
   httpServer: server,
   autoAcceptConnections: true,
   rejectUnauthorized: false
