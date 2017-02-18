@@ -15,15 +15,22 @@ const server = https.createServer(options, function(req, res) {
   } else {
     fileToLoad = 'public' + req.url;
   }
-  console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad);
-  res.writeHeader(200, {"Content-Type": "text/html"});
-  fs.readFile(fileToLoad, 'utf8', function(err, data) {
-    if (err) {
-      return console.log(err);
-    }
-    res.end(data);
-  });
-})
+  if (fs.existsSync(fileToLoad)) {
+    console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad);
+    res.writeHeader(200, {"Content-Type": "text/html"});
+    fs.readFile(fileToLoad, 'utf8', function(err, data) {
+      if (err) {
+       return console.log(err);
+      }
+      res.end(data);
+    });
+  } else {
+    console.log((new Date()) + ' ' + req.connection.remoteAddress + ' not found: ' + fileToLoad);
+    res.writeHeader(200, {"Content-Type": "text/html"});
+    res.write("404 Not Found\n");
+    res.end();
+  }
+});
 
 server.listen(443, function() {
   console.log((new Date()) + ' https server started at port 443');
