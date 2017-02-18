@@ -20,7 +20,7 @@ const server = https.createServer(options, function(req, res) {
     res.writeHeader(200, {"Content-Type": "text/html"});
     fs.readFile(fileToLoad, 'utf8', function(err, data) {
       if (err) {
-       return console.log(err);
+       return console.log((new Date()) + ' ' + err);
       }
       res.end(data);
     });
