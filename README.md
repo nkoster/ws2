@@ -10,6 +10,12 @@ The client example is extracted from https://developer.mozilla.org/en-US/docs/We
 
 Run server.js with Nodejs version v6.9.5. (I didn't test older versions, this is currently stable)
 
+Make sure you have a proper key and certificate in **k.pem** and **c.pem**.
+
 ```bash
+git clone git@gitlab.com:nkoster/ws2.git
+cd ws2/
+npm install
+gulp html js
 node server.js
 ```
