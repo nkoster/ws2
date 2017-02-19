@@ -13,6 +13,9 @@ Make sure you have a proper key and certificate in **k.pem** and **c.pem**.
 ```bash
 git clone git@gitlab.com:nkoster/ws2.git
 cd ws2/
+### In case you don't have an officially signed
+### certificate, create a self-signed certificate
+openssl req -x509 -days 3650 -newkey rsa:2048 -keyout k.pem -out c.pem -nodes
 npm install
 ./node_modules/gulp/bin/gulp.js html js
 node server.js
