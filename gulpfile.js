@@ -11,7 +11,7 @@ gulp.task('html', function() {
     comments: false
   };
   return gulp.src('html/index.html')
-//    .pipe(minifyHTML(opts))
+    .pipe(minifyHTML(opts))
     .pipe(gulp.dest('public/'));
 });
 
@@ -24,7 +24,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
   gulp.src(['js/app.js'])
     .pipe(concat('app.js'))
-//    .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('public/assets'))
 });
 
