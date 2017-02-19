@@ -14,6 +14,6 @@ Make sure you have a proper key and certificate in **k.pem** and **c.pem**.
 git clone git@gitlab.com:nkoster/ws2.git
 cd ws2/
 npm install
-gulp html js
+./node_modules/gulp/bin/gulp.js html js
 node server.js
 ```
