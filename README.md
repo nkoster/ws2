@@ -6,7 +6,7 @@ TLS is based on the default NodeJS cipher set, which already receives an A ratin
 
 The client example is extracted from https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
 
-Run server.js with Nodejs version v6.9.5. (I didn't test older versions, this is currently stable)
+Run server.js with NodeJS version v6.9.5. (Didn't test older versions, this is currently stable)
 
 Make sure you have a proper key and certificate in **k.pem** and **c.pem**.
 
