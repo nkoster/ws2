@@ -25,6 +25,11 @@ if (process.argv.indexOf("-t") != -1) {
   port_telnet = process.argv[process.argv.indexOf("-t") + 1]; 
 }
 
+let host = '127.0.0.1';
+if (process.argv.indexOf("-h") != -1) {
+  host = process.argv[process.argv.indexOf("-h") + 1];
+}
+
 const server = https.createServer(options, function(req, res) {
   let fileToLoad = '';
   if (req.url === '/') {
@@ -50,7 +55,7 @@ const server = https.createServer(options, function(req, res) {
 });
 
 server.listen(port_https, function() {
-  console.log((new Date()) + ' https server started at port ' + port_https);
+  console.log((new Date()) + ' https server started at ' + host + ':' + port_https);
 });
 
 const wsServer = new ws({
@@ -91,5 +96,5 @@ const telnetServer = net.createServer(function(sock) {
 });
 
 telnetServer.listen(port_telnet, function() {
-  console.log((new Date()) + ' telnet server started at port ' + port_telnet);
+  console.log((new Date()) + ' telnet server started at port ' + host + ':' + port_telnet);
 });
