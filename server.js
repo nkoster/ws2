@@ -1,4 +1,10 @@
 'use strict';
+
+process.on('uncaughtException', function(err) {
+  console.error((new Date()) + ' Server cannot load');
+  process.exit();
+});
+
 const
   net = require('net'),
   https = require('https'),
@@ -8,6 +14,16 @@ const
     key: fs.readFileSync('k.pem'),
     cert: fs.readFileSync('c.pem')
   };
+
+let port_https = 10443;
+if (process.argv.indexOf("-w") != -1) {
+  port_https = process.argv[process.argv.indexOf("-w") + 1]; 
+}
+
+let port_telnet = 9501;
+if (process.argv.indexOf("-t") != -1) {
+  port_telnet = process.argv[process.argv.indexOf("-t") + 1]; 
+}
 
 const server = https.createServer(options, function(req, res) {
   let fileToLoad = '';
@@ -33,8 +49,8 @@ const server = https.createServer(options, function(req, res) {
   }
 });
 
-server.listen(443, function() {
-  console.log((new Date()) + ' https server started at port 443');
+server.listen(port_https, function() {
+  console.log((new Date()) + ' https server started at port ' + port_https);
 });
 
 const wsServer = new ws({
@@ -74,6 +90,6 @@ const telnetServer = net.createServer(function(sock) {
   });
 });
 
-telnetServer.listen(9501, function() {
-  console.log((new Date()) + ' telnet server started at port 9501');
+telnetServer.listen(port_telnet, function() {
+  console.log((new Date()) + ' telnet server started at port ' + port_telnet);
 });
