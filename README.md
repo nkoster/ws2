@@ -9,12 +9,26 @@ Run server.js with NodeJS version v6.9.5. (Didn't test older versions, this is c
 Make sure you have a proper key and certificate in **k.pem** and **c.pem**.
 
 ```bash
+### Fetch the files
 git clone git@gitlab.com:nkoster/ws2.git
 cd ws2/
+
 ### In case you don't have an officially signed
 ### certificate, create a self-signed certificate
 openssl req -x509 -days 3650 -newkey rsa:4096 -keyout k.pem -out c.pem -nodes
+
+### Install necessary npm modules
 npm install
+
+### Generate the client code
 ./node_modules/gulp/bin/gulp.js html js
+### Or
+./node_modules/gulp/bin/gulp.js html js -ws wss://example.net
+### (by default, the WebSocket address is wss://localhost:10443)
+
+### Start the server
 node server.js
+### Or
+node server.js -https 443
+### (by default, the server uses port 10443)
 ```
