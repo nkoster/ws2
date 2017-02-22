@@ -20,6 +20,9 @@ openssl req -x509 -days 3650 -newkey rsa:4096 -keyout k.pem -out c.pem -nodes
 ### Install necessary npm modules
 npm install
 
+### Install necessary bower modules
+./node_modules/bower/bin/bower install
+
 ### Generate the client code
 ./node_modules/gulp/bin/gulp.js html js
 ### Or
