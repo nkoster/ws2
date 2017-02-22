@@ -16,16 +16,17 @@ const
   };
 
 let port_https = 10443;
-if (process.argv.indexOf("-w") != -1) {
-  port_https = process.argv[process.argv.indexOf("-w") + 1]; 
+if (process.argv.indexOf("-https") != -1) {
+  port_https = process.argv[process.argv.indexOf("-https") + 1]; 
 }
 
 let port_telnet = 9501;
-if (process.argv.indexOf("-t") != -1) {
-  port_telnet = process.argv[process.argv.indexOf("-t") + 1]; 
+if (process.argv.indexOf("-telnet") != -1) {
+  port_telnet = process.argv[process.argv.indexOf("-telnet") + 1]; 
 }
 
-let host = '127.0.0.1';
+// Does not have any affect, yet...
+let host = '0.0.0.0';
 if (process.argv.indexOf("-h") != -1) {
   host = process.argv[process.argv.indexOf("-h") + 1];
 }
