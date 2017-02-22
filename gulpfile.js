@@ -28,7 +28,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-  gulp.src(['js/reconnecting-websocket.js', 'js/app.js'])
+  gulp.src(['bower_components/webcomponentsjs/webcomponents.min.js', 'js/reconnecting-websocket.js', 'js/app.js'])
     .pipe(concat('app.js'))
     .pipe(replace('%%WS%%', ws))
     .pipe(uglify())
