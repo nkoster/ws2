@@ -2,7 +2,7 @@ Minimal secure NodeJS [WebSocket](https://tools.ietf.org/html/rfc6455) example. 
 
 What works now: open in browser and receive ws updates in the browser console.log about text that was entered into a server side telnet session, to localhost:9501.
 
-TLS is based on the default NodeJS cipher set, which already receives an A rating at ssllabs.com.
+TLS is based on the default NodeJS cipher set, which already receives an A rating at ssllabs.com, if you use an officially signed certificate.
 
 The client example is extracted from https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
 
