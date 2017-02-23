@@ -21,6 +21,17 @@ gulp.task('html', function() {
     .pipe(gulp.dest('public/'));
 });
 
+gulp.task('elements', function() {
+  var opts = {
+    conditionals: true,
+    spare: true,
+    comments: false
+  };
+  return gulp.src('html/elements/*')
+    .pipe(minifyHTML(opts))
+    .pipe(gulp.dest('public/elements'));
+});
+
 gulp.task('css', function() {
   return gulp.src('css/*.css')
     .pipe(minifyCSS({compatibility: 'ie8'}))
