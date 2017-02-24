@@ -36,4 +36,8 @@ node server.js
 ### Or
 node server.js -https 443
 ### (by default, the server uses port 10443)
+
+### Test
+ping google.com | nc localhost 9501
+### Visit https://localhost:10443 to see the result
 ```
