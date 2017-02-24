@@ -26,7 +26,7 @@ npm install
 ./node_modules/bower/bin/bower install
 
 ### Generate the client code
-./node_modules/gulp/bin/gulp.js html js
+./node_modules/gulp/bin/gulp.js bower elements html js
 ### Or
 ./node_modules/gulp/bin/gulp.js bower elements html js -ws wss://example.net
 ### (by default, the WebSocket address is wss://localhost:10443)
