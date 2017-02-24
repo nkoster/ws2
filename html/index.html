@@ -8,6 +8,19 @@
 <script src="/assets/app.js"></script>
 <title>websocket</title>
 <body>
-<proto-element></proto-element>
+<proto-element url="%%WS%%" protocol="echo-protocol"></proto-element>
+<script>
+var wsElement = document.querySelector("proto-element");
+wsElement.addEventListener('onerror', function(error) {
+  throw new Error(error);
+});
+wsElement.addEventListener('onopen', function() {
+  wsElement.send('Hello from client');
+});
+wsElement.addEventListener('onmessage', function(message) {
+  // hello from the server
+  console.log('Message: ' + message.detail);
+});
+</script>
 </body>
 </html>
