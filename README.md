@@ -8,7 +8,7 @@ Run server.js with NodeJS version v6.9.5. (Didn't test older versions, this is c
 
 Make sure you have a proper key and certificate in **k.pem** and **c.pem**.
 
-The client is based on Polymer web components. At this moment, my goal is to fill the Polymer element with WebSocket data. Work in progress.
+The client is based on Polymer web components. Currently, a custom element is receiving the WebSocket updates. Work in progress.
 
 ```bash
 ### Fetch the files
