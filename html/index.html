@@ -5,23 +5,10 @@
 <script src="webcomponentsjs/webcomponents.min.js"></script>
 <link rel="import" href="polymer/polymer.html">
 <link rel="import" href="elements/proto-element.html">
-<script src="/assets/app.js"></script>
+<script src="assets/reconnecting-websocket.js"></script>
 <title>websocket</title>
 <body>
 <proto-element url="%%WS%%" protocol="echo-protocol"></proto-element>
-<script>
-var wsElement = document.querySelector("proto-element");
-wsElement.addEventListener('onerror', function(error) {
-  throw new Error(error);
-});
-wsElement.addEventListener('onopen', function() {
-  wsElement.send('Hello from client');
-});
-wsElement.addEventListener('onmessage', function(message) {
-  // hello from the server
-  wsElement.textContent = message.detail;
-  console.log('Message: ' + message.detail);
-});
-</script>
+<script src="assets/proto-element.js"></script>
 </body>
 </html>
