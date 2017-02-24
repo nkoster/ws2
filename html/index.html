@@ -19,6 +19,7 @@ wsElement.addEventListener('onopen', function() {
 });
 wsElement.addEventListener('onmessage', function(message) {
   // hello from the server
+  wsElement.textContent = message.detail;
   console.log('Message: ' + message.detail);
 });
 </script>
