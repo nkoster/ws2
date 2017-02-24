@@ -18,6 +18,7 @@ gulp.task('html', function() {
   };
   return gulp.src('html/index.html')
 //    .pipe(minifyHTML(opts))
+    .pipe(replace('%%WS%%', ws))
     .pipe(gulp.dest('public/'));
 });
 
@@ -40,6 +41,7 @@ gulp.task('elements', function() {
   };
   return gulp.src('html/elements/*')
 //    .pipe(minifyHTML(opts))
+    .pipe(replace('%%WS%%', ws))
     .pipe(gulp.dest('public/elements'));
 });
 
@@ -50,7 +52,8 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-  gulp.src(['js/reconnecting-websocket.js', 'js/app.js'])
+  //gulp.src(['js/reconnecting-websocket.js', 'js/app.js'])
+  gulp.src(['js/reconnecting-websocket.js'])
     .pipe(concat('app.js'))
     .pipe(replace('%%WS%%', ws))
     .pipe(uglify())
