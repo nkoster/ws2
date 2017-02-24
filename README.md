@@ -38,7 +38,7 @@ node server.js -https 443
 
 The server listens at port 9501 for telnet input.
 
-```
+```bash
 ### Test
 ping google.com | nc localhost 9501
 ### Visit https://localhost:10443 to see the result
