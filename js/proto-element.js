@@ -26,7 +26,9 @@ wsElement.addEventListener('onopen', function () {
   wsElement.send('Thanks!');
 });
 wsElement.addEventListener('onmessage', function (message) {
-  updateScreen(message.detail);
+  message.detail.split("\n").forEach(function (item) {
+    if (item) updateScreen(item + '\n');
+  });
 });
 
 function updateScreen(d) {
@@ -34,9 +36,11 @@ function updateScreen(d) {
   screenBuffer[counter] = d;
   content = '';
   for (i = 0; i < screenBuffer.length; i++) {
-    if (i == counter) {
+    if (i === counter) {
+      content += '-> ' + screenBuffer[i];
+    } else {
+      content += screenBuffer[i];
     }
-    content += screenBuffer[i];
   }
   if (screenChanged) {
     screenChanged = false;
