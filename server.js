@@ -1,6 +1,6 @@
 'use strict';
 
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function (err) {
   console.error((new Date()) + ' Server cannot load');
   process.exit();
 });
@@ -32,7 +32,7 @@ if (process.argv.indexOf("-h") != -1) {
   host = process.argv[process.argv.indexOf("-h") + 1];
 }
 
-const server = https.createServer(options, function(req, res) {
+const server = https.createServer(options, function (req, res) {
   let fileToLoad = '';
   if (req.url === '/') {
     fileToLoad = 'public/index.html';
@@ -42,7 +42,7 @@ const server = https.createServer(options, function(req, res) {
   if (fs.existsSync(fileToLoad)) {
     if (log) console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad);
     res.writeHeader(200, {"Content-Type": "text/html"});
-    fs.readFile(fileToLoad, 'utf8', function(err, data) {
+    fs.readFile(fileToLoad, 'utf8', function (err, data) {
       if (err) {
        if (log) return console.log((new Date()) + ' ' + err);
       }
@@ -56,7 +56,7 @@ const server = https.createServer(options, function(req, res) {
   }
 });
 
-server.listen(port_https, function() {
+server.listen(port_https, function () {
   console.log((new Date()) + ' https server started at ' + host + ':' + port_https);
 });
 
@@ -66,10 +66,10 @@ const wsServer = new ws({
   rejectUnauthorized: false
 });
 
-wsServer.on('request', function(request) {
+wsServer.on('request', function (request) {
   let connection = request.accept(null, request.origin);
   if (log) console.log((new Date()) + ' Connection accepted');
-  connection.on('message', function(message) {
+  connection.on('message', function (message) {
     if (message.type === 'utf8') {
       if (log) console.log((new Date()) + ' Received Message: ' + message.utf8Data);
       connection.sendUTF(message.utf8Data);
@@ -78,25 +78,25 @@ wsServer.on('request', function(request) {
       connection.sendBytes(message.binaryData);
     }
   });
-  connection.on('close', function(reasonCode, description) {
+  connection.on('close', function (reasonCode, description) {
     if (log) console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
   });
 });
 
-const telnetServer = net.createServer(function(sock) {
+const telnetServer = net.createServer(function (sock) {
   if (log) console.log((new Date()) + ' telnet connection ' + sock.remoteAddress);
-  sock.on('data', function(data) {
+  sock.on('data', function (data) {
     let dataToSend = '' + data;
     wsServer.connections.forEach(function(c) {
-      c.send(dataToSend, function() { /* no err handler */ });
+      c.send(dataToSend, function () { /* no err handler */ });
     if (log) process.stdout.write((new Date()) + ' websocket broadcast: ' + dataToSend);
     });
   });
-  sock.on('close', function(data) {
+  sock.on('close', function (data) {
     if (log) console.log((new Date()) + ' closed ' + sock.remoteAddress);
   });
 });
 
-telnetServer.listen(port_telnet, function() {
+telnetServer.listen(port_telnet, function () {
   console.log((new Date()) + ' telnet server started at port ' + host + ':' + port_telnet);
 });
