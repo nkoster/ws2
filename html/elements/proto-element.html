@@ -4,7 +4,7 @@
 
   <template>
     <style>
-      :host {
+      div {
         white-space: pre;
         display: block;
         unicode-bidi: embed;
@@ -12,6 +12,7 @@
         font-family: monospace;
       }
     </style>
+    <div>[[screenBuffer]]</div>
   </template>
 
   <script>
@@ -19,7 +20,7 @@
       is: "proto-element",
       socket: null,
       ready: function () {
-        this.textContent = "Hello, I am Polymer + WebSocket"
+        this.screenBuffer = "Hello, I am Polymer + WebSocket";
         this.socket = new ReconnectingWebSocket('%%WS%%', ["protocolOne", "protocolTwo"]);
         this.socket.onerror = this.onError.bind(this);
         this.socket.onopen = this.onOpen.bind(this);
