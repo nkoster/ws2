@@ -52,12 +52,9 @@ gulp.task('css', function() {
 });
 
 gulp.task('js', function() {
-  //gulp.src(['js/reconnecting-websocket.js', 'js/app.js'])
-  //gulp.src(['js/reconnecting-websocket.js', 'js/proto-element.js])
   gulp.src('js/**')
-    //.pipe(concat('app.js'))
     .pipe(replace('%%WS%%', ws))
-    .pipe(uglify())
+//    .pipe(uglify())
     .pipe(gulp.dest('public/assets'))
 });
 
