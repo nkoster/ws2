@@ -48,7 +48,7 @@ function updateScreen(d) {
     content.split("\n").slice(numberOfLines).join("\n");
     if (counter > numberOfLines) { counter = numberOfLines; }
   }
-  wsElement.screenBuffer = content;
+  wsElement.screenBuffer = screenBuffer.slice();
   if (counter < (numberOfLines - 1)) {
     counter += 1;
   } else {

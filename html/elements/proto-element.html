@@ -5,22 +5,31 @@
   <template>
     <style>
       div {
-        white-space: pre;
-        display: block;
-        unicode-bidi: embed;
+        overflow: hidden;
+        white-space: nowrap;
         line-height: 17px;
         font-family: monospace;
       }
     </style>
-    <div>[[screenBuffer]]</div>
+    <div>
+      <template is="dom-repeat" items="{{screenBuffer}}">
+        <div>{{item}}</div>
+      </template>
+    </div>
   </template>
 
   <script>
     Polymer({
       is: "proto-element",
       socket: null,
+//      properties: {
+//        screenBuffer: {
+//          type: Array,
+//          value: [];
+//        }
+//      },
       ready: function () {
-        this.screenBuffer = "Hello, I am Polymer + WebSocket";
+        this.screenBuffer = [];
         this.socket = new ReconnectingWebSocket('%%WS%%', ["protocolOne", "protocolTwo"]);
         this.socket.onerror = this.onError.bind(this);
         this.socket.onopen = this.onOpen.bind(this);
