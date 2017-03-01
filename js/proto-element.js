@@ -32,14 +32,12 @@ wsElement.addEventListener('onmessage', function (message) {
 });
 
 function updateScreen(d) {
-  var i;
+  var i, buf = [];
   screenBuffer[counter] = d;
-  content = '';
-  for (i = 0; i < screenBuffer.length; i++) {
+  buf = screenBuffer.slice();
+  for (i = 0; i < buf.length; i++) {
     if (i === counter) {
-      content += '-> ' + screenBuffer[i];
-    } else {
-      content += screenBuffer[i];
+      buf[i] = '-> ' + buf[i];
     }
   }
   if (screenChanged) {
@@ -48,7 +46,7 @@ function updateScreen(d) {
     content.split("\n").slice(numberOfLines).join("\n");
     if (counter > numberOfLines) { counter = numberOfLines; }
   }
-  wsElement.screenBuffer = screenBuffer.slice();
+  wsElement.screenBuffer = buf.slice();
   if (counter < (numberOfLines - 1)) {
     counter += 1;
   } else {
