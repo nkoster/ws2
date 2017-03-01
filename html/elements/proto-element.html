@@ -22,12 +22,6 @@
     Polymer({
       is: "proto-element",
       socket: null,
-//      properties: {
-//        screenBuffer: {
-//          type: Array,
-//          value: [];
-//        }
-//      },
       ready: function () {
         this.screenBuffer = [];
         this.socket = new ReconnectingWebSocket('%%WS%%', ["protocolOne", "protocolTwo"]);
