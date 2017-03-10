@@ -33,14 +33,26 @@ if (process.argv.indexOf("-h") != -1) {
 }
 
 const server = https.createServer(options, function (req, res) {
-  let fileToLoad = '';
+  let
+    fileToLoad = '',
+    contentType = 'text/html';
   if (req.url === '/') {
     fileToLoad = 'public/index.html';
   } else {
     fileToLoad = 'public' + req.url;
   }
+  let ext = re.exec(fileToLoad)[1];
+  if (ext === 'js') {
+      contentType = 'application/javascript'
+  } else if (ext === 'css') {
+      contentType = 'text/css'
+  } else if (ext === 'png') {
+      contentType = 'image/png'
+  } else if (ext === 'svg') {
+      contentType = 'image/svg+xml'
+  }
   if (fs.existsSync(fileToLoad)) {
-    if (log) console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad);
+    if (log) console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad + ' (' + contentType + ')';
     res.writeHeader(200, {"Content-Type": "text/html"});
     fs.readFile(fileToLoad, 'utf8', function (err, data) {
       if (err) {
