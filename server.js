@@ -52,7 +52,7 @@ const server = https.createServer(options, function (req, res) {
       contentType = 'image/svg+xml'
   }
   if (fs.existsSync(fileToLoad)) {
-    if (log) console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad + ' (' + contentType + ')';
+    if (log) console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad + ' (' + contentType + ')');
     res.writeHeader(200, {"Content-Type": "text/html"});
     fs.readFile(fileToLoad, 'utf8', function (err, data) {
       if (err) {
