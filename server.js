@@ -41,6 +41,7 @@ const server = https.createServer(options, function (req, res) {
   } else {
     fileToLoad = 'public' + req.url;
   }
+  let re = /(?:\.([^.]+))?$/;
   let ext = re.exec(fileToLoad)[1];
   if (ext === 'js') {
       contentType = 'application/javascript'
