@@ -1,10 +1,11 @@
 'use strict';
 
+/*
 process.on('uncaughtException', function (err) {
   console.error((new Date()) + ' Server cannot load');
   process.exit();
 });
-
+*/
 const
   log = false,
   net = require('net'),
@@ -54,7 +55,7 @@ const server = https.createServer(options, function (req, res) {
   }
   if (fs.existsSync(fileToLoad)) {
     if (log) console.log((new Date()) + ' ' + req.connection.remoteAddress + ' URI: ' + fileToLoad + ' (' + contentType + ')');
-    res.writeHeader(200, {"Content-Type": "text/html"});
+    res.writeHeader(200, {"Content-Type": contentType});
     fs.readFile(fileToLoad, 'utf8', function (err, data) {
       if (err) {
        if (log) return console.log((new Date()) + ' ' + err);
