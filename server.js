@@ -27,7 +27,7 @@ if (process.argv.indexOf("-telnet") != -1) {
   port_telnet = process.argv[process.argv.indexOf("-telnet") + 1]; 
 }
 
-// Does not have any affect, yet...
+// Does not have any effect, yet...
 let host = '0.0.0.0';
 if (process.argv.indexOf("-h") != -1) {
   host = process.argv[process.argv.indexOf("-h") + 1];
