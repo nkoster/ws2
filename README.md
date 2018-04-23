@@ -36,7 +36,7 @@ node server.js -https 443
 ### (by default, the server uses port 10443)
 ```
 
-The server listens at port 9501 for telnet input.
+The server listens at port 9501 for text lines, like, for example nc or telnet input.
 
 ```bash
 ### Test
